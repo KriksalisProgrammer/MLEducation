@@ -18,9 +18,7 @@ out/
 *.parquet
 *.h5
 *.pth
-data/
 datasets/
-models/
 artifacts/
 
 # OS generated
