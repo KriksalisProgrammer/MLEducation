@@ -1,0 +1,28 @@
+﻿# Build & Output
+bin/
+obj/
+out/
+
+# JetBrains Rider & IDEs
+.idea/
+*.sln.iml
+.vs/
+*.user
+*.suo
+
+# ML Models & Large Datasets
+*.onnx
+*.zip
+*.tar.gz
+*.csv
+*.parquet
+*.h5
+*.pth
+data/
+datasets/
+models/
+artifacts/
+
+# OS generated
+.DS_Store
+Thumbs.db
