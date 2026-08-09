@@ -11,7 +11,7 @@ A C# console application designed for machine learning experiments using ML.NET.
 ### Running the Project
 1. Clone the repository:
    ```bash
-   git clone <REPOSITORY_URL>
+   git clone KriksalisProgrammer/MLEducation
    cd "Mathine test/Mathine test"
    ```
 2. Run the application:
