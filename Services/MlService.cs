@@ -368,19 +368,22 @@ public void CompareFeatures(string dataPath)
 
         var model = pipeline.Fit(trainData);
 
-        var predictions =
-            model.Transform(testData);
-
-        var metrics =
-            mlContext.MulticlassClassification.Evaluate(
-                predictions);
+        var trainPredictions = model.Transform(trainData);
+        var trainMetrics = mlContext.MulticlassClassification.Evaluate(trainPredictions);
+        
+        var testPredictions = model.Transform(testData);
+        var testMetrics = mlContext.MulticlassClassification.Evaluate(testPredictions);
+        
+        
+        Console.WriteLine(
+            $"TRAIN Accuracy: {trainMetrics.MacroAccuracy:P2}");
 
         Console.WriteLine(
-            $"Accuracy: {metrics.MacroAccuracy:P2}");
+            $"TEST  Accuracy: {testMetrics.MacroAccuracy:P2}");
 
         Console.WriteLine(
-            $"LogLoss: {metrics.LogLoss:F4}");
+            $"Gap:             {(trainMetrics.MacroAccuracy - testMetrics.MacroAccuracy):P2}");
 
-        return metrics.MacroAccuracy;
+        return testMetrics.MacroAccuracy;
     }
 }

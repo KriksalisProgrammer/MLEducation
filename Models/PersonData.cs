@@ -17,6 +17,21 @@ public class PersonData
     public float RandomFeature { get; set; }
     [LoadColumn(5)]
     public float BMI { get; set; }
+    [LoadColumn(6)]
+    public float RandomFeature1 { get; set; }
+
+    [LoadColumn(7)]
+    public float RandomFeature2 { get; set; }
+
+    [LoadColumn(8)]
+    public float RandomFeature3 { get; set; }
+
+    [LoadColumn(9)]
+    public float RandomFeature4 { get; set; }
+
+    [LoadColumn(10)]
+    public float RandomFeature5 { get; set; }
+
 }
 
 public class PersonPrediction

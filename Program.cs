@@ -39,10 +39,9 @@ void TrainModel()
     Console.WriteLine();
     Console.WriteLine("=== TRAIN MODE ===");
     Console.WriteLine();
+    
 
-    var generator = new DataGenerator();
-
-    generator.Generate(
+    DataGenerator.Generate(
         dataPath,
         10_000);
 
@@ -67,9 +66,9 @@ void CompareFeatures()
 
     if (!File.Exists(dataPath))
     {
-        var generator = new DataGenerator();
+       
 
-        generator.Generate(
+        DataGenerator.Generate(
             dataPath,
             10_000);
 
@@ -82,13 +81,13 @@ void CompareFeatures()
 }
 void CompareFeaturesMultipleTimes()
 {
-    var generator = new DataGenerator();
+   
     Console.WriteLine();
     Console.WriteLine("=== MULTIPLE EXPERIMENTS ===");
 
     if (!File.Exists(dataPath))
     {
-        generator.Generate(
+        DataGenerator.Generate(
             dataPath,
             10_000);
 

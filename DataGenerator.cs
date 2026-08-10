@@ -1,12 +1,13 @@
 ﻿using System.Globalization;
+
 namespace Mathine_test;
 
-public  class DataGenerator
+public class DataGenerator
 {
-    public void Generate(string filePath, int count)
+    public static void Generate(string filePath, int count)
     {
         var random = new Random(42);
-        float randomFeature = (float)random.NextDouble();
+
         using var writer = new StreamWriter(filePath);
 
         for (int i = 0; i < count; i++)
@@ -15,9 +16,11 @@ public  class DataGenerator
             float weight = random.Next(45, 121);
             bool isAthlete = random.Next(0, 2) == 1;
 
-            string result;
             float heightMeters = height / 100f;
             float bmi = weight / (heightMeters * heightMeters);
+
+            string result;
+
             if (weight > 90)
             {
                 result = "Overweight";
@@ -30,6 +33,13 @@ public  class DataGenerator
             {
                 result = "Normal";
             }
+            
+            float randomFeature = (float)random.NextDouble();
+            float randomFeature1 = (float)random.NextDouble();
+            float randomFeature2 = (float)random.NextDouble();
+            float randomFeature3 = (float)random.NextDouble();
+            float randomFeature4 = (float)random.NextDouble();
+            float randomFeature5 = (float)random.NextDouble();
 
             writer.WriteLine(
                 $"{height.ToString(CultureInfo.InvariantCulture)}," +
@@ -37,7 +47,12 @@ public  class DataGenerator
                 $"{isAthlete}," +
                 $"{result}," +
                 $"{randomFeature.ToString(CultureInfo.InvariantCulture)}," +
-                $"{bmi.ToString(CultureInfo.InvariantCulture)}");
+                $"{bmi.ToString(CultureInfo.InvariantCulture)}," +
+                $"{randomFeature1.ToString(CultureInfo.InvariantCulture)}," +
+                $"{randomFeature2.ToString(CultureInfo.InvariantCulture)}," +
+                $"{randomFeature3.ToString(CultureInfo.InvariantCulture)}," +
+                $"{randomFeature4.ToString(CultureInfo.InvariantCulture)}," +
+                $"{randomFeature5.ToString(CultureInfo.InvariantCulture)}");
         }
     }
 }
