@@ -4,7 +4,10 @@ namespace Mathine_test;
 
 public class DataGenerator
 {
-    public static void Generate(string filePath, int count, int randomFeatureCount)
+    public static void Generate(
+        string filePath,
+        int count,
+        int randomFeatureCount)
     {
         var random = new Random(42);
 
@@ -33,18 +36,24 @@ public class DataGenerator
             {
                 result = "Normal";
             }
+
             writer.Write(
                 $"{height.ToString(CultureInfo.InvariantCulture)}," +
                 $"{weight.ToString(CultureInfo.InvariantCulture)}," +
                 $"{isAthlete}," +
                 $"{result}," +
                 $"{bmi.ToString(CultureInfo.InvariantCulture)}");
+            
             for (int j = 0; j < randomFeatureCount; j++)
             {
                 float randomFeature = (float)random.NextDouble();
+
                 writer.Write(
-                    ","+ randomFeature.ToString(CultureInfo.InvariantCulture));
+                    "," +
+                    randomFeature.ToString(
+                        CultureInfo.InvariantCulture));
             }
+
             writer.WriteLine();
         }
     }

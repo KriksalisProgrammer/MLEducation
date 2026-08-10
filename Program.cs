@@ -1,4 +1,5 @@
 ﻿using Mathine_test;
+using Mathine_test.Experiments;
 using Mathine_test.Services;
 using Mathine_test.Models;
 using Microsoft.ML;
@@ -28,11 +29,30 @@ else if (choice == "3")
 }
 else if (choice == "4")
 {
-    CompareFeaturesMultipleTimes();
+    RunRandomFeatureExperiment();
 }
 else
 {
     Console.WriteLine("Неизвестная команда.");
+}
+void RunRandomFeatureExperiment()
+{
+    Console.WriteLine();
+    Console.WriteLine("=== RANDOM FEATURE EXPERIMENT ===");
+    Console.WriteLine();
+
+    DataGenerator.Generate(
+        dataPath,
+        10_000,
+        100);
+
+    Console.WriteLine("Dataset создан!");
+
+    var mlContext = new MLContext(seed: 42);
+
+    RandomFeatureExperiment.Run(
+        mlContext,
+        dataPath);
 }
 void TrainModel()
 {
@@ -43,7 +63,7 @@ void TrainModel()
 
     DataGenerator.Generate(
         dataPath,
-        10_000,10 );
+        10_000,100);
 
     Console.WriteLine("Dataset создан!");
 
@@ -70,7 +90,7 @@ void CompareFeatures()
 
         DataGenerator.Generate(
             dataPath,
-            10_000,10);
+            10_000,100);
 
         Console.WriteLine(
             "Dataset создан!");
@@ -89,7 +109,7 @@ void CompareFeaturesMultipleTimes()
     {
         DataGenerator.Generate(
             dataPath,
-            10_000,10);
+            10_000,100);
 
         Console.WriteLine("Dataset создан!");
     }
