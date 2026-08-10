@@ -4,7 +4,7 @@ namespace Mathine_test;
 
 public class DataGenerator
 {
-    public static void Generate(string filePath, int count)
+    public static void Generate(string filePath, int count, int randomFeatureCount)
     {
         var random = new Random(42);
 
@@ -33,26 +33,19 @@ public class DataGenerator
             {
                 result = "Normal";
             }
-            
-            float randomFeature = (float)random.NextDouble();
-            float randomFeature1 = (float)random.NextDouble();
-            float randomFeature2 = (float)random.NextDouble();
-            float randomFeature3 = (float)random.NextDouble();
-            float randomFeature4 = (float)random.NextDouble();
-            float randomFeature5 = (float)random.NextDouble();
-
-            writer.WriteLine(
+            writer.Write(
                 $"{height.ToString(CultureInfo.InvariantCulture)}," +
                 $"{weight.ToString(CultureInfo.InvariantCulture)}," +
                 $"{isAthlete}," +
                 $"{result}," +
-                $"{randomFeature.ToString(CultureInfo.InvariantCulture)}," +
-                $"{bmi.ToString(CultureInfo.InvariantCulture)}," +
-                $"{randomFeature1.ToString(CultureInfo.InvariantCulture)}," +
-                $"{randomFeature2.ToString(CultureInfo.InvariantCulture)}," +
-                $"{randomFeature3.ToString(CultureInfo.InvariantCulture)}," +
-                $"{randomFeature4.ToString(CultureInfo.InvariantCulture)}," +
-                $"{randomFeature5.ToString(CultureInfo.InvariantCulture)}");
+                $"{bmi.ToString(CultureInfo.InvariantCulture)}");
+            for (int j = 0; j < randomFeatureCount; j++)
+            {
+                float randomFeature = (float)random.NextDouble();
+                writer.Write(
+                    ","+ randomFeature.ToString(CultureInfo.InvariantCulture));
+            }
+            writer.WriteLine();
         }
     }
 }

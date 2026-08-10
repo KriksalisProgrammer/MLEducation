@@ -43,7 +43,7 @@ void TrainModel()
 
     DataGenerator.Generate(
         dataPath,
-        10_000);
+        10_000,10 );
 
     Console.WriteLine("Dataset создан!");
 
@@ -70,7 +70,7 @@ void CompareFeatures()
 
         DataGenerator.Generate(
             dataPath,
-            10_000);
+            10_000,10);
 
         Console.WriteLine(
             "Dataset создан!");
@@ -89,7 +89,7 @@ void CompareFeaturesMultipleTimes()
     {
         DataGenerator.Generate(
             dataPath,
-            10_000);
+            10_000,10);
 
         Console.WriteLine("Dataset создан!");
     }
