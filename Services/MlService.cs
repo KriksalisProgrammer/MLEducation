@@ -150,8 +150,7 @@ public void CompareFeaturesMultipleTimes(string dataPath)
     Console.WriteLine("=================================");
     Console.WriteLine("   MULTIPLE FEATURE EXPERIMENT");
     Console.WriteLine("=================================");
-
-    // Загружаем данные один раз
+    
     IDataView data =
         _mlContext.Data.LoadFromTextFile<PersonData>(
             dataPath,
@@ -163,13 +162,13 @@ public void CompareFeaturesMultipleTimes(string dataPath)
     double[] model1 = new double[experiments];
     double[] model2 = new double[experiments];
     double[] model3 = new double[experiments];
+    double[] model4 = new double[experiments];
 
     for (int i = 0; i < experiments; i++)
     {
         Console.WriteLine();
         Console.WriteLine($"========== EXPERIMENT {i + 1} ==========");
-
-        // Новый MLContext с новым seed
+        
         var experimentMl =
             new MLContext(seed: 100 + i);
 
@@ -210,6 +209,18 @@ public void CompareFeaturesMultipleTimes(string dataPath)
                 "IsAthleteFloat",
                 nameof(PersonData.BMI)
             });
+        model4[i] = TestFeatureSet(
+            experimentMl,
+            "Weight+ IsAthlete + BMI + RandomFeature",
+            split.TrainSet,
+            split.TestSet,
+            new[]
+            {
+                nameof(PersonData.Weight),
+                "IsAthleteFloat",
+                nameof(PersonData.BMI),
+                nameof(PersonData.RandomFeature)
+            });
     }
 
     Console.WriteLine();
@@ -226,6 +237,9 @@ public void CompareFeaturesMultipleTimes(string dataPath)
 
     Console.WriteLine(
         $"MODEL 3 Average: {model3.Average():P2}");
+    
+    Console.WriteLine(
+        $"Model 4 Average: {model4.Average():P2}");
 }
 public void CompareFeatures(string dataPath)
 {
