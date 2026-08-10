@@ -1,5 +1,8 @@
-﻿using Mathine_test.Models;
+﻿using System.Globalization;
+using Mathine_test.Models;
 using Microsoft.ML;
+using Microsoft.ML.Data;
+
 namespace Mathine_test.Services;
 
 public class MlService
@@ -98,6 +101,8 @@ public class MlService
 
         Console.WriteLine(
             $"LogLoss: {metrics.LogLoss:F4}");
+        
+    
 
         Console.WriteLine();
         Console.WriteLine("Confusion Matrix:");
@@ -114,7 +119,48 @@ public class MlService
 
             Console.WriteLine();
         }
+        Console.WriteLine();
+        Console.WriteLine("Metrics by class:");
+
+        for (int i = 0; i < matrix.NumberOfClasses; i++)
+        {
+            double truePositive=matrix.Counts[i][i];
+
+            double falsePositive = 0;
+            double falseNegative = 0;
+
+            for (int j = 0; j < matrix.NumberOfClasses; j++)
+            {
+                if (j != i)
+                {
+                    falsePositive += matrix.Counts[i][j];
+                    falseNegative += matrix.Counts[i][j];
+                }
+            }
+
+            double precision = truePositive + falsePositive == 0
+                ? 0
+                : truePositive / (truePositive + falsePositive);
+            double  recall =  truePositive + falseNegative == 0
+                ? 0
+                : truePositive / (truePositive + falseNegative);
+            double f1 = precision + recall==0
+                ? 0
+                : 2 * precision  * recall / (precision + recall);
+            Console.WriteLine();
+            string className = i switch
+            {
+                0 => "Normal",
+                1 => "Overweight",
+                _ => $"Class {i}",
+            };
+            Console.WriteLine($"Class: {className}");
+            Console.WriteLine($"Prescision: {precision:P2}");
+            Console.WriteLine($"Recall: {recall:P2}");
+            Console.WriteLine($"F1: {f1:P2}");
+        }
     }
+   
 
     public PersonPrediction Predict(
         ITransformer model,
