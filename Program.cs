@@ -11,6 +11,8 @@ Console.WriteLine("1 - Train ");
 Console.WriteLine("2 - Predict ");
 Console.WriteLine("3 - Compare Features");
 Console.WriteLine("4 - Multiple Experiments");
+Console.WriteLine("5 - Cross Validation");
+Console.WriteLine("6 - Cross Validation Feature Comparison");
 Console.WriteLine();
 Console.Write("Your choise: ");
 var choice = Console.ReadLine();
@@ -30,6 +32,14 @@ else if (choice == "3")
 else if (choice == "4")
 {
     RunRandomFeatureExperiment();
+}
+else if (choice == "5")
+{
+    CrossValidation();
+}
+else if(choice== "6")
+{
+    CrossValidationFeatureComparison();
 }
 else
 {
@@ -189,4 +199,44 @@ void Predict()
     {
         Console.WriteLine(score);
     }
+}
+void CrossValidationFeatureComparison()
+{
+    Console.WriteLine();
+    Console.WriteLine("=== CROSS VALIDATION FEATURE COMPARISON ===");
+    Console.WriteLine();
+
+    if (!File.Exists(dataPath))
+    {
+        DataGenerator.Generate(
+            dataPath,
+            10_000,
+            100);
+
+        Console.WriteLine("Dataset создан!");
+    }
+
+    CrossValidationFeatureExperiment.Run(
+        new MLContext(),
+        dataPath);
+}
+void CrossValidation()
+{
+    Console.WriteLine();
+    Console.WriteLine("=== CROSS VALIDATION ===");
+    Console.WriteLine();
+
+    if (!File.Exists(dataPath))
+    {
+        DataGenerator.Generate(
+            dataPath,
+            10_000,
+            100);
+
+        Console.WriteLine("Dataset создан!");
+    }
+
+    CrossValidationExperiment.Run(
+        new MLContext(),
+        dataPath);
 }
