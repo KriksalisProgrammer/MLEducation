@@ -13,6 +13,7 @@ Console.WriteLine("3 - Compare Features");
 Console.WriteLine("4 - Multiple Experiments");
 Console.WriteLine("5 - Cross Validation");
 Console.WriteLine("6 - Cross Validation Feature Comparison");
+Console.WriteLine("7 - Hyperparameter Tuning");
 Console.WriteLine();
 Console.Write("Your choise: ");
 var choice = Console.ReadLine();
@@ -40,6 +41,10 @@ else if (choice == "5")
 else if(choice== "6")
 {
     CrossValidationFeatureComparison();
+}
+else if (choice == "7")
+{
+    HyperparameterTuning();
 }
 else
 {
@@ -88,6 +93,26 @@ void TrainModel()
 
     Console.WriteLine();
     Console.WriteLine("Обучение полностью завершено.");
+}
+void HyperparameterTuning()
+{
+    Console.WriteLine();
+    Console.WriteLine("=== HYPERPARAMETER TUNING ===");
+    Console.WriteLine();
+
+    if (!File.Exists(dataPath))
+    {
+        DataGenerator.Generate(
+            dataPath,
+            10_000,
+            100);
+
+        Console.WriteLine("Dataset создан!");
+    }
+
+    HyperparameterExperiment.Run(
+        new MLContext(),
+        dataPath);
 }
 void CompareFeatures()
 {
