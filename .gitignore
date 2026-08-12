@@ -2,24 +2,40 @@
 bin/
 obj/
 out/
+artifacts/
 
 # JetBrains Rider & IDEs
 .idea/
-*.sln.iml
 .vs/
+*.sln.iml
 *.user
 *.suo
 
-# ML Models & Large Datasets
+# Data & Datasets
+data/
+datasets/
+*.jpg
+*.jpeg
+*.png
+*.webp
+
+# ML Models & Binary Weights
 *.onnx
-*.zip
-*.tar.gz
-*.csv
-*.parquet
 *.h5
 *.pth
-datasets/
-artifacts/
+*.pt
+*.safetensors
+*.ckpt
+
+# Archives & Structured Data
+*.zip
+*.tar.gz
+*.tar
+*.gz
+*.parquet
+
+# Optional CSV rule (см. примечание ниже)
+# *.csv
 
 # OS generated
 .DS_Store

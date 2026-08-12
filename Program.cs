@@ -14,6 +14,14 @@ Console.WriteLine("4 - Multiple Experiments");
 Console.WriteLine("5 - Cross Validation");
 Console.WriteLine("6 - Cross Validation Feature Comparison");
 Console.WriteLine("7 - Hyperparameter Tuning");
+Console.WriteLine("8 - Final Validation");
+Console.WriteLine("9 - Generalization Test");
+Console.WriteLine("10 - Distribution Shift");
+Console.WriteLine("11 - Concept Shift");
+Console.WriteLine("12 - Data Drift Detection");
+Console.WriteLine("13 - Noise & Robustness");
+Console.WriteLine("14 - Noise Augmentation");
+Console.WriteLine("15 - Image Classification");
 Console.WriteLine();
 Console.Write("Your choise: ");
 var choice = Console.ReadLine();
@@ -46,9 +54,54 @@ else if (choice == "7")
 {
     HyperparameterTuning();
 }
+else if (choice == "8")
+{
+    FinalValidation();
+}
+else if (choice == "9")
+{
+    GeneralizationTest();
+}
+else if (choice == "10")
+{
+    DistributionShift();
+}
+else if (choice == "11")
+{
+    ConceptShift();
+}
+else if (choice == "12")
+{
+    DataDriftDetection();
+}
+else if (choice == "13")
+{
+    NoiseRobustness();
+}
+else if (choice == "14")
+{
+    NoiseAugmentation();
+}
+else if (choice == "15")
+{
+    ImageClassification();
+}
 else
 {
     Console.WriteLine("Неизвестная команда.");
+}
+void ImageClassification()
+{
+    ImageClassificationExperiment.Run();
+}
+void NoiseAugmentation()
+{
+    Console.WriteLine();
+    Console.WriteLine("=== NOISE AUGMENTATION ===");
+    Console.WriteLine();
+
+    NoiseAugmentationExperiment.Run(
+        new MLContext(seed: 42));
 }
 void RunRandomFeatureExperiment()
 {
@@ -68,6 +121,15 @@ void RunRandomFeatureExperiment()
     RandomFeatureExperiment.Run(
         mlContext,
         dataPath);
+}
+void NoiseRobustness()
+{
+    Console.WriteLine();
+    Console.WriteLine("=== NOISE & ROBUSTNESS ===");
+    Console.WriteLine();
+
+    NoiseRobustnessExperiment.Run(
+        new MLContext(seed: 42));
 }
 void TrainModel()
 {
@@ -264,4 +326,60 @@ void CrossValidation()
     CrossValidationExperiment.Run(
         new MLContext(),
         dataPath);
+}
+void FinalValidation()
+{
+    Console.WriteLine();
+    Console.WriteLine("=== FINAL VALIDATION ===");
+    Console.WriteLine();
+
+    if (!File.Exists(dataPath))
+    {
+        DataGenerator.Generate(
+            dataPath,
+            10_000,
+            100);
+
+        Console.WriteLine("Dataset создан!");
+    }
+
+    FinalValidationExperiment.Run(
+        new MLContext(seed: 42),
+        dataPath);
+}
+void GeneralizationTest()
+{
+    Console.WriteLine();
+    Console.WriteLine("=== GENERALIZATION TEST ===");
+    Console.WriteLine();
+
+    GeneralizationExperiment.Run(
+        new MLContext(seed: 42));
+}
+void DistributionShift()
+{
+    Console.WriteLine();
+    Console.WriteLine("=== DISTRIBUTION SHIFT ===");
+    Console.WriteLine();
+
+    DistributionShiftExperiment.Run(
+        new MLContext(seed: 42));
+}
+void ConceptShift()
+{
+    Console.WriteLine();
+    Console.WriteLine("=== CONCEPT SHIFT ===");
+    Console.WriteLine();
+
+    ConceptShiftExperiment.Run(
+        new MLContext(seed: 42));
+}
+void DataDriftDetection()
+{
+    Console.WriteLine();
+    Console.WriteLine("=== DATA DRIFT DETECTION ===");
+    Console.WriteLine();
+
+    DataDriftExperiment.Run(
+        new MLContext(seed: 42));
 }

@@ -10,12 +10,20 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.ML" Version="6.0.0-preview.26160.2" />
+      <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
+      <PackageReference Include="TorchSharp" Version="0.107.0" />
+      <PackageReference Include="TorchSharp-cpu" Version="0.107.0" />
     </ItemGroup>
 
     <ItemGroup>
       <None Update="Data\people.csv">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Data\Test\" />
+      <Folder Include="Data\Train\" />
     </ItemGroup>
 
 </Project>

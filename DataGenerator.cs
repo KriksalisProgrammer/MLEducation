@@ -7,16 +7,26 @@ public class DataGenerator
     public static void Generate(
         string filePath,
         int count,
-        int randomFeatureCount)
+        int randomFeatureCount,
+        int seed = 42,
+        int minWeight = 45,
+        int maxWeight = 120,
+        int minHeight = 150,
+        int maxHeight = 200)
     {
-        var random = new Random(42);
+        var random = new Random(seed);
 
         using var writer = new StreamWriter(filePath);
 
         for (int i = 0; i < count; i++)
         {
-            float height = random.Next(150, 201);
-            float weight = random.Next(45, 121);
+            float height = random.Next(
+                minHeight,
+                maxHeight + 1);
+
+            float weight = random.Next(
+                minWeight,
+                maxWeight + 1);
             bool isAthlete = random.Next(0, 2) == 1;
 
             float heightMeters = height / 100f;
@@ -43,10 +53,11 @@ public class DataGenerator
                 $"{isAthlete}," +
                 $"{result}," +
                 $"{bmi.ToString(CultureInfo.InvariantCulture)}");
-            
+
             for (int j = 0; j < randomFeatureCount; j++)
             {
-                float randomFeature = (float)random.NextDouble();
+                float randomFeature =
+                    (float)random.NextDouble();
 
                 writer.Write(
                     "," +
